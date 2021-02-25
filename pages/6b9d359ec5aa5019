@@ -303,9 +303,9 @@ coding pages在国内的访问速度比github pages要快很多，而且还可�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/19.html">
+                      <a href="/pages/f44d2f9ad04ab8d3">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于微店购物的相关问题</span>
+                        <span class="hidden-mobile">GitHub Actions 定时运行代码：每天定时百度链接推送</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -313,8 +313,8 @@ coding pages在国内的访问速度比github pages要快很多，而且还可�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/friends">
-                        <span class="hidden-mobile">友情链接</span>
+                      <a href="/pages/41f87d890d0a02af">
+                        <span class="hidden-mobile">解决百度无法收录搭建在GitHub上的个人博客的问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
