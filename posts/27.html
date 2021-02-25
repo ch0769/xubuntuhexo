@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>利用ssh复制粘贴安装archlinux教程 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="利用ssh复制粘贴安装archlinux教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-15 08:55" pubdate>
+        2021年2月15日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">利用ssh复制粘贴安装archlinux教程</h1>
+            
+            <div class="markdown-body">
+              <h2 id="官方安装教程"><a href="#官方安装教程" class="headerlink" title="官方安装教程"></a>官方安装教程</h2><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></p>
+<h2 id="手敲键盘部分"><a href="#手敲键盘部分" class="headerlink" title="手敲键盘部分"></a>手敲键盘部分</h2><p>开启SSH</p>
+<p>首先设置root的密码 passwd </p>
+<p>回车之后输入root的密码即可 </p>
+<p>打开sshd </p>
+<p>systemctl start sshd </p>
+<p>查看ip地址</p>
+<p> ip addr</p>
+<p>4、安装工具<br>pacman -Syy<br>pacman -S net-tools openssh</p>
+<p>5、启动 ssh</p>
+<p>systemctl start sshd</p>
+<p>dhcpcd  #网线<br>wifi-menu # wifi<br>ping <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>ctrt+c  #退出ping </p>
+<h2 id="复制粘帖部分"><a href="#复制粘帖部分" class="headerlink" title="复制粘帖部分"></a>复制粘帖部分</h2><p>用ssh软件登录</p>
+<p>windows推荐Xshell        linux推荐putty</p>
+<p>登录后就可以复制下面代码敲回车就可以了。</p>
+<h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>查看磁盘信息  sda   </p>
+<p>fdisk -l  # 查看磁盘信息  我查看的是sda 下面请把sda改成你的就可以了   </p>
+<p>硬盘分区有两种方法，请选一种 cfdisk是图像化的  fdisk是纯命令的<br>#方法一：图像化的操作<br>cfdisk /dev/sda<br>分别用new新建三个分区 分别选择Type 选择类型<br>sda1   512M  EFI system<br>sda3    4G      linux swap      # 不要大于虚拟机实际内存<br>sda2   默认剩余全部 linux filesystem<br>分好后选择Write写入 选择<br>Quit退出  </p>
+<p>#方法二：纯命令的操作</p>
+<p>fdisk /dev/sda<br>输入m #显示菜单<br>输入p #显示硬盘情况<br>输入M 输入g   # 硬盘更改成GPT分区</p>
+<p>输入n # 分区<br>先选择1 回车再回车再输入+512M<br>输入t 输入1  # 可以输入L查看格式<br>输入W<br>输入m<br>输入n输入n # 分区<br>先选择3 回车再回车再输入+4G<br>输入t 输入19<br>输入W<br>输入m<br>输入n输入n # 分区<br>先选择2 回车再回车再回车<br>#剩余目录会自动全部分配到这里<br>sda2无需更改格式 默认是就是linux filesystem<br>输入W<br>最后输入q退出分区<br>下面命令直接打复制粘贴就可以了  sda1，2，3 请改成你自己的 </p>
+<p>#上面是两种硬盘分区教程，随便选一种吧，下面要格式化硬盘<br>fdisk -l  # 查看磁盘信息<br>下面的命令直接打复制粘贴就可以了  sda1，2，3 请改成你自己的 </p>
+<h3 id="挂载并格式化"><a href="#挂载并格式化" class="headerlink" title="挂载并格式化"></a>挂载并格式化</h3><p>mkfs.fat -F32 /dev/sda1<br>mkfs.ext4 /dev/sda2<br>mkswap /dev/sda3<br>swapon /dev/sda3</p>
+<p>挂载根分区到/mnt下    </p>
+<p>mount /dev/sda2 /mnt </p>
+<p>创建 boot 文件夹 来挂载EFI分区</p>
+<p>mkdir /mnt/boot  </p>
+<p>挂载EFI分区到 /mnt/boot 下 </p>
+<p>mount /dev/sda1 /mnt/boot  </p>
+<p>df 查看挂载情况</p>
+<h3 id="编辑软件源"><a href="#编辑软件源" class="headerlink" title="编辑软件源"></a>编辑软件源</h3><p>nano /etc/pacman.d/mirrorlist  #fdisk -k 删除多余的源，fdisk -x 退出 y 回车<br>我选了下面三个，选一个也行<br>             <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br>                         mirrors.tuna.tsinghua.edu.cn<br>Server = <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch">https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</a><br>Server = <a target="_blank" rel="noopener" href="http://mirrors.163.com/archlinux/$repo/os/$arch">http://mirrors.163.com/archlinux/$repo/os/$arch</a><br>Server = <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/archlinux/$repo/os/$arch">http://mirrors.aliyun.com/archlinux/$repo/os/$arch</a></p>
+<p>Server = <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$repo/os/$arch">https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$repo/os/$arch</a><br>Server = <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch">https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</a><br>Server = <a target="_blank" rel="noopener" href="http://mirrors.163.com/archlinux/$repo/os/$arch">http://mirrors.163.com/archlinux/$repo/os/$arch</a><br>Server = <a target="_blank" rel="noopener" href="http://mirrors.163.com/archlinux-cn/$repo/os/$arch">http://mirrors.163.com/archlinux-cn/$repo/os/$arch</a></p>
+<p>更新系统<br>pacman -Syy</p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>安装必须的软件包 （不建议）</p>
+<p>pacstrap /mnt base linux linux-firmware</p>
+<p>安装加强版的软件包 （建议）</p>
+<p>pacstrap /mnt base linux linux-firmware base-devel networkmanager intel-ucode vim git openssh net-tools</p>
+<p>用以下命令生成 fstab 文件 (用 -U 或 -L 选项设置UUID 或卷标)：</p>
+<p>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</p>
+<p>cat /mnt/etc/fstab<br>检查<br>vim /mnt/etc/fstab</p>
+<h3 id="Change-root-到新安装的系统"><a href="#Change-root-到新安装的系统" class="headerlink" title="Change root 到新安装的系统"></a>Change root 到新安装的系统</h3><p>arch-chroot /mnt</p>
+<p>#设置时区：<br> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime </p>
+<p>#同步时区<br> hwclock –systohc </p>
+<p>安装vim<br>pacman -S vim</p>
+<p>本地化：</p>
+<p>设置系统语言 </p>
+<p>vim /etc/locale.gen<br>nano /etc/locale.gen </p>
+<p>把 en_US.UTF-8 UTF-8和zh_CN.UTF-8 UTF-8注释都去掉之后 按esc退出编辑模式，然后 :wq 保存退出</p>
+<p>生成一下语言</p>
+<p> locale-gen</p>
+<p>最后设置缺省的语言，这里推荐使用英文，不然到时候进入命令模式的时候会出现中文乱码 </p>
+<p>echo LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf<br>echo LANG=zh_CN.UTF-8 &gt;&gt; /etc/locale.conf<br>sudo vim /etc/locale.conf</p>
+<p>这里使用一个箭头或者两个箭头都可以</p>
+<p>设置 主机名</p>
+<p>echo archlinux &gt;&gt; /etc/hostname</p>
+<p>#网络配置<br>vim /etc/hosts  #输入下面内容</p>
+<p>127.0.0.1 localhost<br>::1 localhost<br>127.0.1.1 archlinux.localdomain archlinux</p>
+<p>127.0.0.1    localhost    localhost<br>::1          localhost   localhost<br>127.0.1.1    archlinux.localdomain    archlinux</p>
+<p>保存并退出</p>
+<p>安装网络管理（如果不安装这个服务的话，每次开机都得重新设置网络）<br>pacman -S networkmanager<br>pacman -S net-tools openssh<br>开机启动<br>systemctl enable NetworkManager sshd</p>
+<p>设置root密码<br>passwd</p>
+<p>安装一个其他用户<br>useradd -m -g wheel chenan </p>
+<p>passwd chenan</p>
+<p>pacman -S sudo</p>
+<p>visudo   # 去掉%wheel=（ALL）ALL 前面的#号</p>
+<h3 id="安装grub"><a href="#安装grub" class="headerlink" title="安装grub"></a>安装grub</h3><p>重新生成ramdisk环境<br>mkinitcpio -p linux</p>
+<p>pacman -S grub efibootmgr<br>grub-install –target=x86_64-efi –efi-directory=/boot –bootloader-id=GRUB<br>grub-mkconfig -o /boot/grub/grub.cfg</p>
+<p>exit 或按 Ctrl+d 退出 chroot 环境。</p>
+<p>可选用 umount -R /mnt 手动卸载被挂载的分区：这有助于发现任何「繁忙」的分区，并通过 fuser(1) 查找原因。</p>
+<p>最后，通过执行 reboot 重启系统</p>
+<h2 id="再用ssh软件登录，安装桌面和服务"><a href="#再用ssh软件登录，安装桌面和服务" class="headerlink" title="再用ssh软件登录，安装桌面和服务"></a>再用ssh软件登录，安装桌面和服务</h2><h3 id="添加清华源"><a href="#添加清华源" class="headerlink" title="添加清华源"></a>添加清华源</h3><p>sudo vim /etc/pacman.conf<br>把multilib和它下面一行的 # 去掉，具体是把光标移到 # 那，按 x ，然后在文件里添加 archlinuxcn 源，按 i 输入<br>[archlinuxcn]<br>Server = <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch">https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</a></p>
+<p>sudo pacman -Syu</p>
+<p>sudo pacman -S archlinuxcn-keyring</p>
+<p>sudo pacman -Syyu   #更新到最新系统</p>
+<h3 id="安装x-服务"><a href="#安装x-服务" class="headerlink" title="安装x 服务"></a>安装x 服务</h3><p>sudo pacman -S xorg</p>
+<h3 id="安装桌面环境"><a href="#安装桌面环境" class="headerlink" title="安装桌面环境"></a>安装桌面环境</h3><p>sudo pacman -S xfce4 xfce4-goodies</p>
+<h3 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h3><p>sudo pacman -S ttf-dejavu wqy-bitmapfont wqy-microhei wqy-zenhei noto-fonts noto-fonts-emoji</p>
+<h3 id="安装ligthdm"><a href="#安装ligthdm" class="headerlink" title="安装ligthdm"></a>安装ligthdm</h3><p>pacman -S lightdm lightdm-gtk-greeter</p>
+<p>sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings<br>systemctl enable lightdm</p>
+<p>systemctl enable lightdm.service</p>
+<p>从图形界面进入到命令行界面</p>
+<p>systemctl disable lightdm.service<br>从命令行进入到图形界面</p>
+<p>systemctl enable lightdm.service<br>然后</p>
+<p>systemctl start lightdm.service</p>
+<h3 id="测试开启桌面"><a href="#测试开启桌面" class="headerlink" title="测试开启桌面"></a>测试开启桌面</h3><p>sudo systemctl start lightdm.service</p>
+<h3 id="自动开启桌面"><a href="#自动开启桌面" class="headerlink" title="自动开启桌面"></a>自动开启桌面</h3><p>systemctl enable lightdm.service</p>
+<h3 id="安装声卡驱动"><a href="#安装声卡驱动" class="headerlink" title="安装声卡驱动"></a>安装声卡驱动</h3><p>sudo pacman -S alsa-utils pulseaudio-alsa</p>
+<h3 id="虚拟机显卡驱动"><a href="#虚拟机显卡驱动" class="headerlink" title="虚拟机显卡驱动"></a>虚拟机显卡驱动</h3><p>pcaman -S xf86-video-vesa</p>
+<h3 id="安装软件商店"><a href="#安装软件商店" class="headerlink" title="安装软件商店"></a>安装软件商店</h3><p>sudo pacman -S pamac</p>
+<h3 id="安装yay"><a href="#安装yay" class="headerlink" title="安装yay"></a>安装yay</h3><p>sudo pacman -S yay<br>sudo pacman -S pcaman</p>
+<h3 id="英文改中文"><a href="#英文改中文" class="headerlink" title="英文改中文"></a>英文改中文</h3><p>sudo vim /etc/locale.conf<br>LANG=en_US.UTF-8  改成 LANG=zh_CN.UTF-8</p>
+<h3 id="按照官网教程安装VMware-Tools"><a href="#按照官网教程安装VMware-Tools" class="headerlink" title="按照官网教程安装VMware Tools"></a>按照官网教程安装VMware Tools</h3><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/VMware/Install_Arch_Linux_as_a_guest">https://wiki.archlinux.org/index.php/VMware/Install_Arch_Linux_as_a_guest</a></p>
+<p>sudo pacman -S xf86-input-vmmouse xf86-video-vmware mesa</p>
+<p>sudo pacman -S open-vm-tools gtkmm3</p>
+<p>sudo systemctl start vmtoolsd.service</p>
+<p>sudo systemctl enable vmtoolsd.service</p>
+<p>sudo systemctl start vmware-vmblock-fuse.service</p>
+<p>sudo systemctl enable vmware-vmblock-fuse.service</p>
+<p>sudo pacman -S gtkmm gtk2</p>
+<p>sudo vim /etc/mkinitcpio.conf<br>MODULES=(）前面加# 下一行加上下面的代码<br>MODULES=(vsock vmw_vsock_vmci_transport vmw_balloon vmw_vmci vmwgfx)</p>
+<h3 id="Xorg设置"><a href="#Xorg设置" class="headerlink" title="Xorg设置"></a>Xorg设置</h3><p>pacman -S xf86-input-vmmouse xf86-video-vmware mesa<br>yay -S xf86-input-vmmouse xf86-video-vmware mesa</p>
+<p>vim /etc/X11/Xwrapper.config</p>
+<p>needs_root_rights=yes</p>
+<h3 id="安装小企鹅"><a href="#安装小企鹅" class="headerlink" title="安装小企鹅"></a>安装小企鹅</h3><p>sudo pacman -S fcitx fcitx-im fcitx-configtool</p>
+<p>sudo pacman -S fcitx fcitx-im</p>
+<h3 id="配置小企鹅输入法"><a href="#配置小企鹅输入法" class="headerlink" title="配置小企鹅输入法"></a>配置小企鹅输入法</h3><p>sudo vim ~/.xprofile</p>
+<p>在文件中加入如下几行配置：</p>
+<p>#fcitx<br>export LC_ALL=zh_CN.UTF-8<br>export GTK_IM_MODULE=fcitx<br>export QT_IM_MODULE=fcitx<br>export XMODIFIERS=”@im=fcitx”</p>
+<h3 id="安装搜狗输入法"><a href="#安装搜狗输入法" class="headerlink" title="安装搜狗输入法"></a>安装搜狗输入法</h3><p>sudo pacman -S yay<br>yay -S fcitx-sogoupinyin<br>yay -S fcitx-qt4</p>
+<p>从AUR下载安装包并安装<br>打开<a target="_blank" rel="noopener" href="https://aur.archlinux.org/">https://aur.archlinux.org/</a><br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/deepin.com.qq.im.light/">https://aur.archlinux.org/packages/deepin.com.qq.im.light/</a><br>解压<br>tar -zxvf deepin.com.qq.im.light.tar.gz<br>在解压后的目录输入<br>makepkg -s<br>编译完成后会生成一个.pkg.tar.xz的文件,再用pacman -U执行本地安装<br>pacman -U deepin.com.qq.im.light-7.9.14308deepin8-4-x86_64.pkg.tar.zst</p>
+<p>tar -zxvf  deepin-wine-wechat.tar.gz</p>
+<p>pacman -U deepin.com.qq.im.light.tar.gz</p>
+<h3 id="谷歌输入法"><a href="#谷歌输入法" class="headerlink" title="谷歌输入法"></a>谷歌输入法</h3><p>sudo pacman -S fcitx-googlepinyin</p>
+<h3 id="常用软件安装"><a href="#常用软件安装" class="headerlink" title="常用软件安装"></a>常用软件安装</h3><p>wps</p>
+<p><a target="_blank" rel="noopener" href="https://linux.wps.cn/">https://linux.wps.cn/</a><br>yay -S wps-office<br>安装中文<br>yay -S wps-office-mui-zh-cn</p>
+<p>可以到软件商店设置里面开启AUR<br>找到wps-office-mui-zh-cn 点击构建  耐心等待几分钟，安装后 新建一个文档<br>右上角有个A字，点击，就可以选择中文，重启WPS 就是中文的了</p>
+<p>yaourt -S deepin.com.qq.im</p>
+<p>yaourt -S deepin-wine deepin-wine32</p>
+<p>wps 依赖字体</p>
+<p>sudo pacman -S ttf-wps-fonts</p>
+<p>google-chrome<br>sudo pacman -S google-chrome</p>
+<p>Markdown编辑器<br>sudo pacman -S typora</p>
+<p>网易云音乐<br>sudo pacman -S netease-cloud-music<br>yaourt -S netease-cloud-music</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14J411i72o?from=search&amp;seid=10908065740456618903">https://www.bilibili.com/video/BV14J411i72o?from=search&amp;seid=10908065740456618903</a><br><a target="_blank" rel="noopener" href="https://github.com/xylzq/arch">https://github.com/xylzq/arch</a></p>
+<h3 id="关于arch的一些实用软件"><a href="#关于arch的一些实用软件" class="headerlink" title="关于arch的一些实用软件"></a>关于arch的一些实用软件</h3><p>1.录屏软件</p>
+<p>sudo pacman -S simplescreenrecorder<br>2.显示按键软件</p>
+<p>sudo pacman -S screenkey<br>3.剪辑视频软件</p>
+<p>sudo pacman -S kdenlive<br>汉化<br>sudo mv kdenlive.mo /usr/share/locale/zh_CN/LC_MESSAGES/</p>
+<p>pan.baidu.com/s/1dFF8kp<br>4.修图软件</p>
+<p>sudo pacman -S gimp</p>
+<p>安装坚果云<br>sudo pacman -S nutstore</p>
+<p>安装微信<br>sudo pacman -S electronic-wechat</p>
+<p>安装<br>sudo pacman -S yaourt</p>
+<p>网盘同步Rclone<br>sudo pacman -S rclone</p>
+<p>gitkraken -Git管理工具</p>
+<p>sudo pacman -S gitkraken<br>Vscode:visual-studio-code-bin<br>yay -S visual-studio-code-bin</p>
+<p>Virtualbox<br>sudo pacman -S virtualbox </p>
+<p>aur qq<br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/deepin.com.qq.im.light/">https://aur.archlinux.org/packages/deepin.com.qq.im.light/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/orangbus/tool">https://github.com/orangbus/tool</a></p>
+<p>画图软件 KRITA</p>
+<p>安装AppImage软件<br>添加可执行权限<br>chmod a+x <em>.AppImage<br>执行它！<br>./</em>.AppImage</p>
+<p>chmod a+x Qv2ray.v2.7.0-pre1.linux-x64.AppImage<br>./Qv2ray.v2.7.0-pre1.linux-x64.AppImage</p>
+<h3 id="一个将deb包转换成pkg包的软件"><a href="#一个将deb包转换成pkg包的软件" class="headerlink" title="一个将deb包转换成pkg包的软件"></a>一个将deb包转换成pkg包的软件</h3><p>debtap配置安装<br>sudo pacman -S pkgfile<br>git clone <a target="_blank" rel="noopener" href="https://github.com/helixarch/debtap">https://github.com/helixarch/debtap</a><br>cd debtap<br> sudo cp debtap /usr/local/bin<br> sudo debtap -u  </p>
+<p>sudo vim /usr/bin/debtap</p>
+<p>使用方法<br>   sudo debtap xxxx.deb</p>
+<p>安装时会提示输入包名，以及license。包名随意，license就填GPL</p>
+<p>安装转换好的本地包<br>   sudo pacman -U xxx.tar.xz</p>
+<p>sudo debtap wps-office_11.1.0.9719_amd64.deb</p>
+<p>sudo pacman -U wps-office-11.1.0.9719-1-x86_64.pkg.tar.zst</p>
+<p>sudo debtap Tenvideo_universal_1.0.10_amd64.deb</p>
+<p>sudo pacman -U tenvideo-universal-1.0.10-1-x86_64.pkg.tar.zst</p>
+<h3 id="安装安卓模拟器xDroid"><a href="#安装安卓模拟器xDroid" class="headerlink" title="安装安卓模拟器xDroid"></a>安装安卓模拟器xDroid</h3><p><a target="_blank" rel="noopener" href="https://www.linzhuotech.com/">https://www.linzhuotech.com/</a></p>
+<p>系统更新<br>sudo pacman -Syu </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/archlinux/">archlinux</a>
+                    
+                      <a class="hover-with-bg" href="/categories/archlinux/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/categories/archlinux/linux/%E7%94%B5%E8%84%91%E7%B3%BB%E7%BB%9F/">电脑系统</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%94%B5%E8%84%91%E7%B3%BB%E7%BB%9F/">电脑系统</a>
+                    
+                      <a class="hover-with-bg" href="/tags/archlinux/">archlinux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/28.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VScode简单教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pages/baaa02/">
+                        <span class="hidden-mobile">2分钟规则</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

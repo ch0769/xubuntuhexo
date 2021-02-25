@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="GitHub Actions 定时运行代码：每天定时百度链接推送博客上线已经有些日子了，却发现百度迟迟没有收录我的博客页面，在百度推送工具当中除了有自动推送的代码嵌入网站之外，还有一个实时的主动推送更高效。
+最近刚好了解到GitHub Actions的定时运行代码功能，可以用它来每天自动运行命令生成所有博客链接并进行一次性推送给百度。
+GitHub Actions 是一个 CI/CD（持续集成/持">
+  
+  <meta name="author" content="[object Object]">
+  <meta name="keywords" content="">
+  
+  <title>GitHub Actions 定时运行代码：每天定时百度链接推送 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GitHub Actions 定时运行代码：每天定时百度链接推送">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-30 21:23" pubdate>
+        2019年12月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GitHub Actions 定时运行代码：每天定时百度链接推送</h1>
+            
+            <div class="markdown-body">
+              <h1 id="GitHub-Actions-定时运行代码：每天定时百度链接推送"><a href="#GitHub-Actions-定时运行代码：每天定时百度链接推送" class="headerlink" title="GitHub Actions 定时运行代码：每天定时百度链接推送"></a>GitHub Actions 定时运行代码：每天定时百度链接推送</h1><p>博客上线已经有些日子了，却发现百度迟迟没有收录我的博客页面，在百度推送工具当中除了有自动推送的代码嵌入网站之外，还有一个实时的主动推送更高效。</p>
+<p>最近刚好了解到GitHub Actions的定时运行代码功能，可以用它来每天自动运行命令生成所有博客链接并进行一次性推送给百度。</p>
+<p>GitHub Actions 是一个 CI/CD（持续集成/持续部署）工具，但也可用作代码运行环境。<strong>功能非常强大，能够玩出许多花样。</strong></p>
+<span id="more"></span>
+
+<h2 id="百度主动链接推送"><a href="#百度主动链接推送" class="headerlink" title="百度主动链接推送"></a>百度主动链接推送</h2><p>链接主动推送在百度站长中有介绍，如图。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xugaoyi/image_store/blog/20200103124306.png" srcset="/img/loading.gif" alt="主动提交"></p>
+<p>具体使用方法就是创建一个文件<code>urls.txt</code>，文件内每行一条链接的格式写入提交的多个链接，如图。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xugaoyi/image_store/blog/20200103124305.png" srcset="/img/loading.gif" alt="urls.txt"></p>
+<p>运行命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -H <span class="hljs-string">&#x27;Content-Type:text/plain&#x27;</span> --data-binary @urls.txt <span class="hljs-string">&quot;http://data.zz.baidu.com/urls?site=xugaoyi.com&amp;token=T5PEAzhG*****&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>上面命令的地址和参数由百度站长提供。运行完命令会返回推送结果，不出意外的话就会把<code>urls.txt</code>内的所有链接一次性推送给百度。</p>
+<p>这个方法虽然比嵌入网站头部的自动推送更高效，但是也有它的麻烦之处，就是得自己填入链接到<code>urls.txt</code>文件，然后手动运行命令。</p>
+<h2 id="自动生成urls-txt"><a href="#自动生成urls-txt" class="headerlink" title="自动生成urls.txt"></a>自动生成urls.txt</h2><p>没关系，技术的本质就是让人”偷懒”的。于是，我写了一个nodejs工具，用于把所有的博客页面链接生成到<code>urls.txt</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// baiduPush.js</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 生成百度链接推送文件</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);<br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br><span class="hljs-keyword">const</span> logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;tracer&#x27;</span>).colorConsole();<br><span class="hljs-keyword">const</span> matter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gray-matter&#x27;</span>); <span class="hljs-comment">// FrontMatter解析器 https://github.com/jonschlinkert/gray-matter</span><br><span class="hljs-keyword">const</span> readFileList = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./modules/readFileList&#x27;</span>);<br><span class="hljs-keyword">const</span> urlsRoot = path.join(__dirname, <span class="hljs-string">&#x27;..&#x27;</span>, <span class="hljs-string">&#x27;urls.txt&#x27;</span>); <span class="hljs-comment">// 百度链接推送文件</span><br><span class="hljs-keyword">const</span> DOMAIN = process.argv.splice(<span class="hljs-number">2</span>)[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 获取命令行传入的参数</span><br><br><span class="hljs-keyword">if</span> (!DOMAIN) &#123;<br>  logger.error(<span class="hljs-string">&#x27;请在运行此文件时指定一个你要进行百度推送的域名参数，例：node utils/baiduPush.js https://xugaoyi.com&#x27;</span>)<br>  <span class="hljs-keyword">return</span><br>&#125;<br><br>main();<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>&#123;<br>  fs.writeFileSync(urlsRoot, DOMAIN)<br>  <span class="hljs-keyword">const</span> files = readFileList(); <span class="hljs-comment">// 读取所有md文件数据</span><br><br>  files.forEach( <span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> &#123; data &#125; = matter(fs.readFileSync(file.filePath, <span class="hljs-string">&#x27;utf8&#x27;</span>)); <br><br>    <span class="hljs-keyword">if</span> (data.permalink) &#123;<br>      <span class="hljs-keyword">const</span> link = <span class="hljs-string">`\r\n<span class="hljs-subst">$&#123;DOMAIN&#125;</span><span class="hljs-subst">$&#123;data.permalink&#125;</span>/`</span>;<br>      <span class="hljs-built_in">console</span>.log(link)<br>      fs.appendFileSync(urlsRoot, link);<br>    &#125;<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面代码仅是针对我个人的博客生成链接到<code>urls.txt</code>文件。更多代码在 <a target="_blank" rel="noopener" href="https://github.com/xugaoyi/vuepress-theme-vdoing/blob/master/utils/baiduPush.js">这里</a>。</p>
+<p>运行如下命令就可以生产一个包含博客所有链接的<code>urls.txt</code>文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">node utils/baiduPush.js https://xugaoyi.com<br></code></pre></td></tr></table></figure>
+<p>哈哈，第一个麻烦解决了:smirk:，接下来是解决第二个需要手动运行推送命令的问题。</p>
+<blockquote>
+<p><strong>如果你没办法自动生成，你也可以自己手动创建一个<code>urls.txt</code>文件，放到github仓库。</strong></p>
+</blockquote>
+<h2 id="GitHub-Actions-定时运行代码"><a href="#GitHub-Actions-定时运行代码" class="headerlink" title="GitHub Actions 定时运行代码"></a>GitHub Actions 定时运行代码</h2><p>今天的主角GitHub Actions 要登场了。（相关：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html?20191227113947#comment-last">GitHub Actions 入门教程</a>、<a target="_blank" rel="noopener" href="https://xugaoyi.com/pages/6b9d359ec5aa5019/">GitHub Actions 实现自动部署静态博客</a>）</p>
+<p>GitHub Actions 是一个 CI/CD（持续集成/持续部署）工具，但也可用作代码运行环境。<strong>功能非常强大，能够玩出许多花样。</strong></p>
+<h3 id="配置-GitHub-Actions"><a href="#配置-GitHub-Actions" class="headerlink" title="配置 GitHub Actions"></a>配置 GitHub Actions</h3><p>触发 GitHub Actions 需要在项目仓库新建一个<code>.github/workflows</code>子目录，里面是 <a target="_blank" rel="noopener" href="https://xugaoyi.com/pages/4e8444e2d534d14f/">YAML 格式</a>配置文件，文件名可以随便取。GitHub 只要发现配置文件，就会运行 Actions。</p>
+<p>配置文件的第一部分是触发条件。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment">## baiduPush.yml</span><br>name: <span class="hljs-string">&#x27;baiduPush&#x27;</span><br> <br>on:<br>  push:<br>  schedule:<br>    - cron: <span class="hljs-string">&#x27;0 23 * * *&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>name</code>字段是配置文件的描述，<code>on</code>字段是触发条件。我们指定两种情况下触发，第一种是代码 Push 进仓库，第二种是<a target="_blank" rel="noopener" href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows#scheduled-events-schedule">定时任务</a>，每天在国际标准时间23点（北京时间+8，即早上7点）运行。</p>
+<blockquote>
+<p>定时设置看<a target="_blank" rel="noopener" href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows#scheduled-events-schedule">这里</a></p>
+</blockquote>
+<p>接着，就是运行流程。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">jobs</span>:<br>  bot:<br>    runs-on: ubuntu-latest <span class="hljs-comment"># 运行环境为最新版的Ubuntu</span><br>    steps:<br>      - name: <span class="hljs-string">&#x27;Checkout codes&#x27;</span> <span class="hljs-comment"># 步骤一，获取仓库代码</span><br>        uses: actions/checkout@v1<br>      - name: <span class="hljs-string">&#x27;Run baiduPush.sh&#x27;</span> <span class="hljs-comment"># 步骤二，执行sh命令文件</span><br>        run: npm install &amp;&amp; npm run baiduPush <span class="hljs-comment"># 运行命令。（注意，运行目录是仓库根目录）</span><br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，指定运行环境是最新的ubuntu，流程的第一步是从代码仓库获取代码，第二步运行两个命令，先安装项目依赖，再运行写在<code>package.json</code>的<code>baiduPush</code>命令。完整代码看 <a target="_blank" rel="noopener" href="https://github.com/xugaoyi/vuepress-theme-vdoing/blob/master/.github/workflows/baiduPush.yml">这里</a></p>
+<h3 id="baiduPush命令在package-json配置"><a href="#baiduPush命令在package-json配置" class="headerlink" title="baiduPush命令在package.json配置"></a><code>baiduPush</code>命令在<code>package.json</code>配置</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// package.json</span><br><span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>	<span class="hljs-string">&quot;baiduPush&quot;</span>: <span class="hljs-string">&quot;node utils/baiduPush.js https://xugaoyi.com &amp;&amp; bash baiduPush.sh&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面脚本中在<code>node utils/baiduPush.js</code>的后面加入你的域名参数。运行此命令生成<code>urls.txt</code>文件，然后执行<code>baiduPush.sh</code>文件。</p>
+<p>注意，在使用window系统时，请使用git bash命令窗运行上面的脚本。</p>
+<blockquote>
+<p><code>baiduPush</code>命令之所以没有放在<code>baiduPush.yml</code>的 run 里面是因为我想在本地也可以执行<code>npm run baiduPush</code>命令。</p>
+</blockquote>
+<h3 id="baiduPush-sh执行百度推送命令"><a href="#baiduPush-sh执行百度推送命令" class="headerlink" title="baiduPush.sh执行百度推送命令"></a><code>baiduPush.sh</code>执行百度推送命令</h3><p><code>baiduPush.sh</code>文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/usr/bin/env sh</span><br><br><span class="hljs-built_in">set</span> -e<br><br><span class="hljs-comment"># 百度链接推送</span><br>curl -H <span class="hljs-string">&#x27;Content-Type:text/plain&#x27;</span> --data-binary @urls.txt <span class="hljs-string">&quot;http://data.zz.baidu.com/urls?site=https://xugaoyi.com&amp;token=T5PEAzhGa*****&quot;</span><br><br>rm -rf urls.txt <span class="hljs-comment"># 灭迹</span><br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，把<code>urls.txt</code>文件中的所有链接一次性推送。</p>
+<blockquote>
+<p>baiduPush.sh内的命令之所以没有写在<code>package.json</code>是因为我觉得命令太长了，不方便阅读。</p>
+</blockquote>
+<p>写好配置，推送到仓库，就会在每天的早上7点钟，自动运行命令生成一个包含博客所有页面链接的<code>urls.txt</code>文件，并把所有链接一次性推送到百度。麻麻再也不用担心我的网站不被收录~~:kissing_heart: :kissing_heart: :kissing_heart: </p>
+<p>在这个基础上可以扩展，使用GitHub Actions满足你自己的各种定时需求。</p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a target="_blank" rel="noopener" href="https://xugaoyi.com/pages/6b9d359ec5aa5019/">《 GitHub Actions 实现自动部署静态博客》</a></p>
+<p><a target="_blank" rel="noopener" href="https://xugaoyi.com/pages/41f87d890d0a02af/">《解决百度无法收录搭建在GitHub上的静态博客的问题》</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/GitHub%E6%8A%80%E5%B7%A7/">GitHub技巧</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+                    
+                      <a class="hover-with-bg" href="/tags/github/">github</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pages/a5f73af5185fdf0a">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GitHub + jsDelivr + TinyPNG+ PicGo 打造稳定快速、高效免费图床</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/19.html">
+                        <span class="hidden-mobile">关于微店购物的相关问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

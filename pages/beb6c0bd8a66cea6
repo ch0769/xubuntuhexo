@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="个人收藏夹大佬收藏夹
+panjiachen
+">
+  
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>网站 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="网站">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-19 11:33" pubdate>
+        2020年4月19日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">网站</h1>
+            
+            <div class="markdown-body">
+              <h1 id="个人收藏夹"><a href="#个人收藏夹" class="headerlink" title="个人收藏夹"></a>个人收藏夹</h1><h2 id="大佬收藏夹"><a href="#大佬收藏夹" class="headerlink" title="大佬收藏夹"></a>大佬收藏夹</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://panjiachen.github.io/awesome-bookmarks/">panjiachen</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web">MDN</a> | <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects">MDN-JS标准内置对象</a> Web技术权威文档</li>
+<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/">现代JavaScript教程</a> 以最新标准为基准的JS教程</li>
+<li><a target="_blank" rel="noopener" href="https://wangdoc.com/javascript/">ES5教程</a> 阮一峰的JS教程</li>
+<li><a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/">ES6教程</a> 阮一峰的ES6教程</li>
+<li><a target="_blank" rel="noopener" href="https://wangdoc.com/bash/">Bash 脚本教程</a> 阮一峰编写</li>
+<li><a target="_blank" rel="noopener" href="https://www.ecma-international.org/">ECMA</a> ECMA官网</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/">菜鸟教程</a> 涵盖多种语言的初级教程</li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/devdocs">腾讯云开发者手册</a></li>
+</ul>
+<h2 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/">Github</a> 程序员同性交友社区</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/">掘金</a> 一个帮助开发者成长的社区</li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/">简书</a> 有很多频道的创作社区</li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/">思否</a> 解决技术问题的社区</li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/">stack overflow</a> 同上，外网的</li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/topic/Front-end">InfoQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/">V2EX</a></li>
+<li><a target="_blank" rel="noopener" href="https://mo.fish/main/home/hot">鱼塘热榜</a> 划水网站，收集了很多网站，当天热门文章</li>
+<li><a target="_blank" rel="noopener" href="https://maliquankai.com/designnav/">码力全开资源库</a> 很全很强大，独立开发者/设计干货/优质利器/工具资源…</li>
+</ul>
+<h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/">阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.samanthaming.com/">samanthaming</a> 对前端小知识点的总结，并为每个知识点制作精美的小卡片。</li>
+</ul>
+<h2 id="电子书"><a href="#电子书" class="headerlink" title="电子书"></a>电子书</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://www.yuanchengcheng.vip/books">前端电子书收集</a></li>
+<li><a target="_blank" rel="noopener" href="https://sobooks.cc/">SoBooks</a> 免费的电子书资源网站</li>
+</ul>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d4d0ec651882549594e7293">灵活运用CSS开发技巧</a></li>
+</ul>
+<h2 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.ggfwzs.com/">谷歌chrome商店访问助手</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.datacenterfarm.com/2549.html">谷歌云(GCP)一键搭建 V2Ray 让你畅快科学上网</a></p>
+</li>
+</ul>
+<h2 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.imooc.com/">慕课网</a> 实战视频教程</li>
+<li><a target="_blank" rel="noopener" href="https://www.miaov.com/">妙味课堂</a> 比较系统的前端入门视频教程</li>
+<li><a target="_blank" rel="noopener" href="https://www.icourse163.org/">中国大学MOOC</a> 涵盖计算机、外语、心理学等专业免费课程</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/">bilibili</a> B站，上面也有一些可供学习的免费视频</li>
+<li><a target="_blank" rel="noopener" href="http://egghead.io/">egghead</a> 质量还不错的短视频教程，外网</li>
+</ul>
+<h3 id="电视直播"><a href="#电视直播" class="headerlink" title="电视直播"></a>电视直播</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://ivi.bupt.edu.cn/">CCTV、卫视高清直播</a></li>
+</ul>
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://git.io/">github 短域名服务</a></li>
+<li><a target="_blank" rel="noopener" href="https://shields.io/">shields</a> 徽章图标</li>
+<li><a target="_blank" rel="noopener" href="https://wangchujiang.com/github-rank/index.html">followers 全球排名</a></li>
+<li><a target="_blank" rel="noopener" href="https://star-history.t9t.io/">star-history</a> 展示一个项目 Stars 增长曲线</li>
+</ul>
+<h2 id="在线工具"><a href="#在线工具" class="headerlink" title="在线工具"></a>在线工具</h2><h3 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://caniuse.com/">Can I use</a> 查看属性和方法的兼容性</li>
+<li><a target="_blank" rel="noopener" href="https://30secondsofcode.org/">30 seconds of code</a> 收集了许多有用的代码小片段</li>
+</ul>
+<h3 id="代码编辑"><a href="#代码编辑" class="headerlink" title="代码编辑"></a>代码编辑</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/">codepen</a> 在线代码编辑与演示</li>
+<li><a target="_blank" rel="noopener" href="https://codesandbox.io/">codesandbox</a> 内嵌VSCode的在线IDE</li>
+</ul>
+<h3 id="Emoji表情"><a href="#Emoji表情" class="headerlink" title="Emoji表情"></a>Emoji表情</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://emojipedia.org/">emoji表情</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.webfx.com/tools/emoji-cheat-sheet">emoji表情备忘录</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/carloscuesta/gitmoji">gitmoji</a> 通过 emoji 表达 git 的操作内容<blockquote>
+<p>windows系统下按<kbd>Win</kbd>+<kbd>.</kbd>快速打开表情选择框</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="图片工具"><a href="#图片工具" class="headerlink" title="图片工具"></a>图片工具</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://tinypng.com/">tinypng图片压缩</a> 压缩png很有用</li>
+<li><a target="_blank" rel="noopener" href="https://squoosh.app/">Squoosh</a> 谷歌出品在线免费图片压缩工具</li>
+<li><a target="_blank" rel="noopener" href="http://waifu2x.udp.jp/">waifu2x</a> 通过卷积网络放大图片</li>
+<li><a target="_blank" rel="noopener" href="https://vectormagic.com/">vectormagic</a> 转换矢量图</li>
+<li><a target="_blank" rel="noopener" href="https://www.vectorizer.io/">vectorizer</a> 真正的 png 转 svg 神器</li>
+<li><a target="_blank" rel="noopener" href="https://photo.opencool.cn/">在线AI图片处理</a> 黑白修复、无损放大、动漫化、铅笔画等。</li>
+<li><a target="_blank" rel="noopener" href="https://www.remove.bg/zh">remove</a> AI抠图</li>
+</ul>
+<h3 id="作图"><a href="#作图" class="headerlink" title="作图"></a>作图</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.processon.com/">processon在线作图</a> 流程图、思维导图、原型图等</li>
+<li><a target="_blank" rel="noopener" href="https://naotu.baidu.com/">百度脑图</a> 思维导图</li>
+</ul>
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://css-tricks.neatbang.com/">CSS Tricks</a> CSS技巧收集与演示</li>
+<li><a target="_blank" rel="noopener" href="https://neumorphism.io/">CSS生成器</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.colorzilla.com/gradient-editor/">CSS渐变生成器</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.html.cn/tool/css3Preview/Box-Shadow.html">CSS3-Box Shadow(阴影)</a></li>
+<li><a target="_blank" rel="noopener" href="https://cubic-bezier.com/">贝塞尔曲线生成器    </a></li>
+<li><a target="_blank" rel="noopener" href="http://www.heropatterns.com/">花纹背景生成器</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bansal-io/pattern.css">花纹背景-pattern.css</a></li>
+<li><a target="_blank" rel="noopener" href="https://bennettfeely.com/ztext/">3D字体</a></li>
+<li><a target="_blank" rel="noopener" href="https://css-tricks.com/">css-tricks</a> css技巧文章</li>
+<li><a target="_blank" rel="noopener" href="https://lhammer.cn/You-need-to-know-css/#/zh-cn/">You-need-to-know-css</a> CSS的各种DEMO，很全</li>
+<li><a target="_blank" rel="noopener" href="https://animista.net/">animista</a> CSS动画可视化工具</li>
+</ul>
+<h3 id="CDN加速"><a href="#CDN加速" class="headerlink" title="CDN加速"></a>CDN加速</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://www.jsdelivr.com/">jsDelivr</a> 国外的一家优秀的公共 CDN 服务提供商</li>
+<li><a target="_blank" rel="noopener" href="https://unpkg.com/">unpkg</a> cdn 服务</li>
+</ul>
+<h3 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://regex101.com/">正则可视化</a></li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://ipcmen.com/">Linux命令手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://carbon.now.sh/">代码图片生成器</a></li>
+</ul>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://chuangzaoshi.com/">创造师导航</a></li>
+<li><a target="_blank" rel="noopener" href="http://hao.uisdc.com/">设计师网址导航</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.remove.bg/zh">remove</a> AI抠图，抠图算法很厉害</li>
+<li><a target="_blank" rel="noopener" href="https://www.manypixels.co/gallery/">Manypixels</a> 插画</li>
+<li><a target="_blank" rel="noopener" href="https://undraw.co/illustrations">Undraw</a> 插画</li>
+<li><a target="_blank" rel="noopener" href="https://uimovement.com/">uimovement</a> 能从这个网站找到不少动画交互的灵感</li>
+<li><a target="_blank" rel="noopener" href="https://www.awwwards.com/">awwwards</a>是一个一个专门为设计精美的网站以及富有创意的网站颁奖的网站</li>
+<li><a target="_blank" rel="noopener" href="https://dribbble.com/">dribbble</a> 经常能在上面找到很多有创意好看的 gif 或者图片</li>
+<li><a target="_blank" rel="noopener" href="https://www.behance.net/">Bēhance</a> dribbble 是设计师的微博，Bēhance 是设计师的博客</li>
+<li><a target="_blank" rel="noopener" href="https://logojoy.com/">Logojoy</a> 使用 ai 做 logo 的网站，做出来的 logo 质量还不错。</li>
+<li><a target="_blank" rel="noopener" href="http://brandmark.io/">brandmark</a> 另一个在线制作 logo 网站</li>
+<li><a target="_blank" rel="noopener" href="https://instantlogodesign.com/">instant</a> 又一个 logo 制作网站</li>
+<li><a target="_blank" rel="noopener" href="https://www.namecheap.com/logo-maker/app/">namecheap</a>又一个 logo 制作网站</li>
+<li><a target="_blank" rel="noopener" href="https://www.designevo.com/logo-maker/">logo-maker</a> 又一个 logo 制作网站 这个更简单点 就是选模板之后微调</li>
+<li><a target="_blank" rel="noopener" href="https://coolors.co/">coolors</a> 帮你在线配色的网站 你能找到不少配色灵感</li>
+<li><a target="_blank" rel="noopener" href="http://colorhunt.co/">colorhunt</a> 另一个配色网站</li>
+<li><a target="_blank" rel="noopener" href="https://uigradients.com/#SummerDog">uigradients</a> 渐变色网站</li>
+<li><a target="_blank" rel="noopener" href="https://www.designcap.com/">designcap</a> 在线海报设计</li>
+<li><a target="_blank" rel="noopener" href="https://flatuicolors.com/">Flat UI 色表</a> Flat UI 色表</li>
+<li><a target="_blank" rel="noopener" href="https://www.0to255.com/">0to255</a> 颜色梯度</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mikolajdobrucki/ikonate">Ikonate</a> 提供免费的图标 icons</li>
+<li><a target="_blank" rel="noopener" href="https://remixicon.com/">remixicon</a> 又一个提供免费图标 icons</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/feathericons/feather">feather</a> 免费的 icons</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/arcticicestudio/nord">nord </a> 北欧性冷淡风主题配色</li>
+<li><a target="_blank" rel="noopener" href="https://unsplash.com/">Unsplash</a> 提供免费的高清图片</li>
+<li><a target="_blank" rel="noopener" href="https://www.pexels.com/zh-cn/">Pexels</a> 提供免费的高清图片</li>
+<li><a target="_blank" rel="noopener" href="https://colorkitty.com/">colorkitty</a> 从你的图片中提取配色</li>
+<li><a target="_blank" rel="noopener" href="http://design.youzan.com/">design.youzan</a> 有赞设计原则</li>
+</ul>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">iconfont</a> 阿里巴巴矢量图标库</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://undraw.co/illustrations">undraw</a> 免费的矢量插画</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://icomoon.io/">icomoon</a> 矢量图标库</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://cssicon.space/#/">cssicon</a> 所有的 icon 都是纯 css 画的 缺点：icon 不够多</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://apps.eky.hk/css-triangle-generator/">CSS triangle generator</a> 帮你快速用 css 做出三角形</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://bennettfeely.com/clippy/">clippy</a> 在线帮你使用 css clip-path 做出各种形状的图形</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://picsum.photos/">Lorem Picsum</a> 提供免费的占位图</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.canva.cn/">Canva 可画</a> 生成插画、封面、海报、头像等</p>
+<h3 id="图库"><a href="#图库" class="headerlink" title="图库"></a>图库</h3></li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://uigradients.com/">uigradients</a> 渐变色生成工具</li>
+<li><a target="_blank" rel="noopener" href="https://www.freepik.com/">freepik</a> banner 图库</li>
+<li><a target="_blank" rel="noopener" href="http://www.51yuansu.com/">觅元素</a>一天免费下载十张 psd</li>
+<li><a target="_blank" rel="noopener" href="https://www.gaoding.com/">搞定设计</a> 可以抠图</li>
+<li><a target="_blank" rel="noopener" href="https://www.vectorizer.io/">vectorizer</a> 真正的 png 转 svg 神器</li>
+<li><a target="_blank" rel="noopener" href="https://www.zcool.com.cn/">站酷</a></li>
+<li><a target="_blank" rel="noopener" href="https://huaban.com/">花瓣</a></li>
+<li><a target="_blank" rel="noopener" href="https://huke88.com/">虎克</a> Ps 学习教程</li>
+<li><a target="_blank" rel="noopener" href="https://themes.muffingroup.com/be/splash/">beTheme</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ui.cn/">UI 中国</a></li>
+</ul>
+<h2 id="有趣"><a href="#有趣" class="headerlink" title="有趣"></a>有趣</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://fuun.fun/">奇趣网站收藏家</a> 收藏了很多有趣的网站</li>
+<li><a target="_blank" rel="noopener" href="http://www.baidu-x.com/">帮你百度一下</a> 可以 <a target="_blank" rel="noopener" href="http://www.baidu-x.com/?q=%E5%92%8C%E8%B0%90%E6%9C%89%E7%88%B1%E5%AF%8C%E5%BC%BA">点我测试一下</a>-</li>
+<li><a target="_blank" rel="noopener" href="http://lmgtfy.com/">国际版</a> 同<code>帮我百度一下</code>-<a target="_blank" rel="noopener" href="http://lmgtfy.com/?q=a">点我测试一下</a>-</li>
+<li><a target="_blank" rel="noopener" href="https://alpha.wallhaven.cc/">wallhaven</a> 壁纸网站-</li>
+<li><a target="_blank" rel="noopener" href="http://matthewrayfield.com/articles/animating-urls-with-javascript-and-emojis/#%F0%9F%8C%96">URL 地址播放 Emojis 动画</a> 在地址栏里面播放 emoji</li>
+<li><a target="_blank" rel="noopener" href="https://cantunsee.space/">Can’t Unsee</a> 强烈建议前端、客户端、UI 开发的同学玩下，检查一下自己对设计稿的敏感度怎么样</li>
+<li><a target="_blank" rel="noopener" href="https://talk.swift.gg/">ggtalk</a> 平时一直在听的一个技术博客</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Blankj/awesome-comment">awesome-comment</a> 里面收集了很多有趣的代码注释</li>
+<li><a target="_blank" rel="noopener" href="https://www.text-image.com/index.html">text-img</a> 都将图片转化为 ascii 用来写注释</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/beizhedenglong/weird-fonts">weird-fonts</a> 将普通字母转化为 特殊 unicode</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/epidemian/snake">snake</a> 在地址栏里面玩贪吃蛇</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yuanfux/zero-width-lib">zero-width-lib</a> 利用零宽度字符实现 隐形水印、加密信息分享、逃脱词匹配，很有创意</li>
+<li><a target="_blank" rel="noopener" href="https://www.abbreviations.com/">abbreviations</a> 查看一个简写是什么意思的网站</li>
+<li><a target="_blank" rel="noopener" href="https://magi.com/">magi</a> ai 搜索神器，超屌</li>
+<li><a target="_blank" rel="noopener" href="https://zzkia.noddl.me:8020/">诺基亚短信图片生成器</a></li>
+</ul>
+<h2 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://aliscued.lofter.com/">微交互</a> 里面收集了市面上很多很好的微交互例子 值得学习</li>
+<li><a target="_blank" rel="noopener" href="http://littlebigdetails.com/">Little Big Details</a> 同上，一个国外微交互汇集网站</li>
+<li><a target="_blank" rel="noopener" href="https://cruip.com/">cruip</a> 登录页的各种页面设计，可以免费下载模板</li>
+<li><a target="_blank" rel="noopener" href="https://comixify.ii.pw.edu.pl/">Comixify</a> 一个波兰团队做了非常好玩的工具，可以把视频自动转成漫画，上图是他们提供的 demo，效果很棒。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bui/taiko-web">taiko-web</a> 太鼓达人网页版 只能说很 6</li>
+</ul>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://egghead.io/courses/execute-npm-package-binaries-with-the-npx-package-runner">npx</a> 教你怎么合理的使用 npx</li>
+<li><a target="_blank" rel="noopener" href="https://www.hacksplaining.com/lessons">hacksplaining</a> 网络安全学习网站</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mcuking/mobile-web-best-practice">mobile-web-best-practice</a> 移动 web 最佳实践</li>
+</ul>
+<h2 id="产品"><a href="#产品" class="headerlink" title="产品"></a>产品</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://www.pmdaniu.com/">产品大牛</a> 什么有很多完整的产品原型可以借鉴</li>
+<li><a target="_blank" rel="noopener" href="https://modao.cc/pricing">磨刀</a> 快速出 ui 原型</li>
+</ul>
+<h2 id="实用"><a href="#实用" class="headerlink" title="实用"></a>实用</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://browser-update.org/">browser-update</a> 浏览器版本更新提示插件</li>
+<li><a target="_blank" rel="noopener" href="https://admin.typeform.com/signup">typeform</a> 一个国外的在线调查问卷网站</li>
+<li><a target="_blank" rel="noopener" href="https://www.videofk.com/">VideoFk</a> VideoFk 视频在线解析下载</li>
+<li><a target="_blank" rel="noopener" href="https://www.allhistory.com/">全历史</a> 历史内容聚合网站</li>
+<li><a target="_blank" rel="noopener" href="https://www.uzer.me/">UzerMe</a> 云端办公工具</li>
+<li><a target="_blank" rel="noopener" href="https://sobooks.cc/">SoBooks</a> 强大的电子书资源网站</li>
+<li><a target="_blank" rel="noopener" href="https://www.gaoding.com/">稿定设计</a> 键式设计工具+智能抠图</li>
+<li><a target="_blank" rel="noopener" href="https://dalipan.com/">大力盘</a> 百度网盘搜索</li>
+<li><a target="_blank" rel="noopener" href="https://www.macbl.com/app/internet/enfi">ENFI 下载器</a> 不限速下载器</li>
+<li><a target="_blank" rel="noopener" href="https://www.laihua.com/">来画视频</a> 像做 PPT 一样做短视频</li>
+<li><a target="_blank" rel="noopener" href="https://www.arkie.cn/">Arkie 海报制作工具</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ypppt.com/">优品 PPT</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.tretars.com/">比格 PPT</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pexels.com/">高清免费图片</a></li>
+<li><a target="_blank" rel="noopener" href="https://unsplash.com/">高清免费图片 2</a></li>
+</ul>
+<h2 id="Talk"><a href="#Talk" class="headerlink" title="Talk"></a>Talk</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/peerigon/talks">peerigon-talks</a> 收集了不少有意思的 talks</li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/azl397985856/leetcode">leetcode</a> 用 js 刷 leetcode</li>
+</ul>
+<h2 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ventusky.com/">Ventusky</a> 风雨气温图</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pages/12df8ace52d493f6">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vue资源</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pages/eee83a9211a70f9d">
+                        <span class="hidden-mobile">资源</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

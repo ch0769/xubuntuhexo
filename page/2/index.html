@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="An elegant Material-Design theme for Hexo">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/22.html">hugo搭建和使用教程</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/22.html">
+          
+          
+            
+          
+          前言  做博客就图个稳定，一次性买了10年的域名，搭配免费的github，适合做长期博客。  之前安装的hexo，可玩性非常强，前面文章有写一些关于hexo的安装使用教程，用了一年多，也发现了一些问题，hexo版本更新各种不兼容，访问速度慢，，很影响心情，自己都懒得搭理博客了，国内cdn加速需要备案，只是做个小站，不想太麻烦。  所幸，无意中发现荒野无灯大神把站转移到hugo，访问速度非常快，于是
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-01 15:55" pubdate>
+              2020-06-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%BD%91%E7%AB%99/">网站</a>
+            
+              <a href="/tags/hugo/">hugo</a>
+            
+              <a href="/tags/github/">github</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/12df8ace52d493f6">Vue资源</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/12df8ace52d493f6">
+          
+          
+            
+          
+          vue资源官方资源
+官方指南
+API 参考
+GitHub 回购
+发行说明
+样式指南
+Vue.js 新闻
+
+外部资源
+vue.js 资料まとめ(日语)by @hashrock
+Vue.js 新闻稿-每周精选的 Vue.js 新闻的剂量
+Vue.js 提示-成为更好的 Vue.js 开发人员的提示
+Vue.js Wikipedia
+Vue.js Radar-精选的新闻通讯和网站，涵盖了新的 Vue.j
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-19 11:39" pubdate>
+              2020-04-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/beb6c0bd8a66cea6">网站</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/beb6c0bd8a66cea6">
+          
+          
+            
+          
+          个人收藏夹大佬收藏夹
+panjiachen
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-19 11:33" pubdate>
+              2020-04-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/eee83a9211a70f9d">资源</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/eee83a9211a70f9d">
+          
+          
+            
+          
+          个人收藏夹::: tip收集一些常用的库、插件等资源，正在整理中…:::
+前端常用
+待整理
+
+Vue
+Vuesax 一个优质的vue的组件库
+
+移动端
+fastclick 解决移动端点击延迟300ms问题
+better-scroll 移动端滚动插件
+
+工具 &amp; 插件
+codota AI代码智能提示（应用于代码编辑器）
+
+Node
+commander 提供了用户命令行输入和参数解析的强大功能
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-12 08:58" pubdate>
+              2020-04-12
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/d557b9a89a215d2e">vdoing主题效果图</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/d557b9a89a215d2e">
+          
+          
+            
+          
+          vdoing主题效果图PC端
+
+
+首页 & 目录页△
+
+
+文章详情页 & 时间轴页△
+
+首页个性化大图
+
+首页个性化大图△
+
+深色模式和阅读模式
+
+
+深色模式△
+
+
+阅读模式△
+
+移动端
+
+
+
+
+移动端效果△
+
+
+    /* .content__default img{border: 1px solid #ccc;} */
+
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-08 11:27" pubdate>
+              2020-04-08
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/21.html">LG V30 韩版V300L 8.0 9.0 root刷类原生系统Havoc 10.0的详细过程</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/21.html">
+          
+          
+            
+          
+          前言官方系统：刷机root后，未安装其他软件，开机scene查看内存占50%安装日常软件，开发者选项里面，系统可用用内存一般在200左右
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-23 15:18" pubdate>
+              2020-03-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA/">安卓手机</a>
+            
+              <a href="/categories/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA/LG-V30/">LG V30</a>
+            
+              <a href="/categories/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA/LG-V30/%E5%88%B7%E6%9C%BA/">刷机</a>
+            
+              <a href="/categories/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA/LG-V30/%E5%88%B7%E6%9C%BA/root/">root</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA/">安卓手机</a>
+            
+              <a href="/tags/LG-V30/">LG V30</a>
+            
+              <a href="/tags/%E5%88%B7%E6%9C%BA/">刷机</a>
+            
+              <a href="/tags/root/">root</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/95331c6a9613faf8">GitHub加速下载项目的方法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/95331c6a9613faf8">
+          
+          
+            
+          
+          GitHub加速下载项目的方法国内在github上克隆项目总是异常的慢，据我多次克隆观察，下载速度最快就20k/s左右，特别是在克隆比较大的项目时简直慢得无法忍受！下面介绍一种加载克隆项目的方法。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-09 10:28" pubdate>
+              2020-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/GitHub%E6%8A%80%E5%B7%A7/">GitHub技巧</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/2d615df9a36a98ed">一个完美主义者的自我救赎</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/2d615df9a36a98ed">
+          
+          
+            
+          
+          一个完美主义者的自我救赎最近，看到一个心理测试题是测试你是否有完美主义：
+
+（1）你是不是经常为自己设定目标，而且最终往往达不到那些目标？
+（2）当一件事件做得不够好时，你是否有再试一次的想法？
+（3）你是否休息时仍想着学习、工作、或者其他还没有解决的事？
+（4）如果遇到别人说话或打岔，破坏了你的注意力，你是否觉得不太高兴？
+（5）你是否常常会在事后想，如果当时能换成另一种方式来解决，也许会更加理
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-16 15:15" pubdate>
+              2020-01-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%9B%B4%E5%A4%9A/">更多</a>
+            
+              <a href="/categories/%E6%9B%B4%E5%A4%9A/%E5%BF%83%E6%83%85%E6%9D%82%E8%B4%A7/">心情杂货</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pages/a8692ab3bdcb4588">提高学习效率的策略</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/pages/a8692ab3bdcb4588">
+          
+          
+            
+          
+          提高学习效率的策略推荐一本关于学习方法的书《认知天性》，里面有讲到有一些简单实用的学习策略，能让大家学的更好、记得更牢，而且这些策略人人可用，时时可用。这些方法包括各种形式的检索练习——例如小的测试和自测，间隔练习、穿插不同但相关科目或技能的练习（多样化练习），在别人教给你解决方案前自己先试着解决问题，从不同类型问题中提取基本原理和规则。由于学习是反复的过程，需要复习早先学过的东西，持续更新已知，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-04 11:54" pubdate>
+              2020-01-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%9B%B4%E5%A4%9A/">更多</a>
+            
+              <a href="/categories/%E6%9B%B4%E5%A4%9A/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/20.html">k2p老毛子固件绑定域名之 cloudflare.com</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/20.html">
+          
+          
+            
+          
+          k2p老毛子固件绑定域名之 cloudflare.com
+使用 Cloudflare 实现顶级个人域名的 ddns 服务。 https://www.cloudflare.com
+使用前需要安装 curl 程序，可以安装opt后输入 opkg install curl 敲回车键安装启用opt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-03 13:10" pubdate>
+              2020-01-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/k2p/">k2p</a>
+            
+              <a href="/categories/k2p/%E5%9F%9F%E5%90%8D/">域名</a>
+            
+              <a href="/categories/k2p/%E5%9F%9F%E5%90%8D/cloudflare/">cloudflare</a>
+            
+              <a href="/categories/k2p/%E5%9F%9F%E5%90%8D/cloudflare/%E8%B7%AF%E7%94%B1/">路由</a>
+            
+              <a href="/categories/k2p/%E5%9F%9F%E5%90%8D/cloudflare/%E8%B7%AF%E7%94%B1/%E7%BD%91%E7%AB%99/">网站</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/k2p/">k2p</a>
+            
+              <a href="/tags/%E5%9F%9F%E5%90%8D/">域名</a>
+            
+              <a href="/tags/cloudflare/">cloudflare</a>
+            
+              <a href="/tags/%E8%B7%AF%E7%94%B1/">路由</a>
+            
+              <a href="/tags/%E7%BD%91%E7%AB%99/">网站</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

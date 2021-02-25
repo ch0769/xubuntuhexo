@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>n1终极玩法Armbian-5.77安装docker宝塔openwrt和HomeAssistant - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="n1终极玩法Armbian-5.77安装docker宝塔openwrt和HomeAssistant">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-02 15:55" pubdate>
+        2020年6月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      876 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">n1终极玩法Armbian-5.77安装docker宝塔openwrt和HomeAssistant</h1>
+            
+            <div class="markdown-body">
+              <h1 id="安装Armbian-5-77"><a href="#安装Armbian-5-77" class="headerlink" title="安装Armbian-5.77"></a>安装Armbian-5.77</h1><p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-510423-1-1.html">https://www.right.com.cn/forum/thread-510423-1-1.html</a>  </p>
+<h2 id="下载Armbian-5-77写入U盘"><a href="#下载Armbian-5-77写入U盘" class="headerlink" title="下载Armbian-5.77写入U盘"></a>下载Armbian-5.77写入U盘</h2><h2 id="替换低负载的dtb"><a href="#替换低负载的dtb" class="headerlink" title="替换低负载的dtb"></a>替换低负载的dtb</h2><p>meson-gxl-s905d-phicomm-n1-xiangsm.dtb  </p>
+<h2 id="开启bbr"><a href="#开启bbr" class="headerlink" title="开启bbr"></a>开启bbr</h2><p>在/etc/sysctl.conf末尾添加下面两行:<br>net.core.default_qdisc=fq<br>net.ipv4.tcp_congestion_control=bbr<br>然后执行<br>sudo sysctl -p  </p>
+<h2 id="写入emmc"><a href="#写入emmc" class="headerlink" title="写入emmc"></a>写入emmc</h2><p>./install.sh  </p>
+<h2 id="更换国内源"><a href="#更换国内源" class="headerlink" title="更换国内源"></a>更换国内源</h2><p>如果有外国IP就不用更换源了<br>sudo nano /etc/apt/sources.list</p>
+<p>修改源为国内源<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cndebian/">http://mirrors.tuna.tsinghua.edu.cndebian</a> stretch main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian">http://mirrors.tuna.tsinghua.edu.cn/debian</a> stretch-updates main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian-security">http://mirrors.tuna.tsinghua.edu.cn/debian-security</a> stretch/updates main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian">http://mirrors.tuna.tsinghua.edu.cn/debian</a> stretch-backports main  </p>
+<p>保存后，更新源<br>执行 apt-get update 命令即可更新源<br>执行 apt-get upgrade 更新软件  </p>
+<h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><p>输入 armbian-config<br>选择Software，回车确认 接着选择Softy，回车确认 最后选择docker，空格勾选，回车确认开始安装<br>然后，按tab键，选择OK，回车确认 最后等docker程序自动安装完成  </p>
+<h2 id="docker安装portainer"><a href="#docker安装portainer" class="headerlink" title="docker安装portainer"></a>docker安装portainer</h2><p>docker pull portainer/portainer<br>docker run -d -p 9888:9000 -v /var/run/docker.sock:/var/run/docker.sock –restart=always –name prtainer portainer/portainer<br>如果遇到安装失败一般都是源的问题，换IP可以解决  </p>
+<h2 id="挂载docker数据到数据盘"><a href="#挂载docker数据到数据盘" class="headerlink" title="挂载docker数据到数据盘"></a>挂载docker数据到数据盘</h2><p>考虑到N1只有6G可用储存，我们可以将dockers安装到数据盘，接入U盘或者硬盘，输入<br>df -i，比如查询硬盘为  /dev/sda1<br>将硬盘挂载到mnt （其他目录也可以）<br>输入mount /dev/sda1 /mnt<br>输入 blkid /dev/sda1 查询 得到数据<br>UUID=”a78e3c99-2754-034e-abd1-36后面省略<br>输入命令开机自动挂载<br>echo ‘UUID=a78e3c99-2754-034e-abd1-36后面省略 /mnt ext4 defaults 0 0’ &gt;&gt; /etc/fstab<br>输入 mount -a<br>检查是否挂载好  df -h<br>备份docker数据<br>cp -r /var/lib/docker_data /var/lib/docker<br>移动docker数据到硬盘<br>mv /var/lib/docker /mnt/docker<br>把硬盘的目录发送到N1<br>ln -s /mnt/docker /var/lib/docker</p>
+<h2 id="docker安装openwrt"><a href="#docker安装openwrt" class="headerlink" title="docker安装openwrt"></a>docker安装openwrt</h2><p>docker pull unifreq/openwrt-aarch64:r20.04.08<br>ip link set eth0 promisc on<br>modprobe pppoe<br>docker network create -d macvlan –subnet=192.168.123.0/24 –gateway=192.168.123.1 -o parent=eth0 macnet<br>docker run –restart always -d –network macnet –privileged –ip=192.168.123.2 unifreq/openwrt-aarch64:r20.04.08 /sbin/init<br>大家根据自己的实际IP改下代码<br>再登录portainer管理页面，点container<br>vi /etc/config/network<br>按i改网关信息，op的ip要改成跟主路由同网关，比如192.168.123.2或者192.168.123.3，改好后依次按返回键，:wq保存退出。再点disconnect，在containers那勾选op 点restart重启op。 (部分op需手动复制粘贴以下两条<br>192.168.2.1改成你主路由ip。不复制进去就登陆不了op<br>option gateway ‘192.168.123.1’<br>option dns ‘114.114.114.114 223.5.5.5’<br>另外再教大家安装下载好的openwrt<br>导入本地编译好的rootfs.tar.gz并部署<br>随便导入一个文件夹  cd /到这个文件夹<br>docker import openwrt-armvirt-64-default-rootfs.tar.gz openwrt:R9.9.15<br>再输入<br>docker run –restart always -d –network macnet –privileged –ip=192.168.123.5 openwrt:R9.9.15 /sbin/init<br>vi /etc/config/network<br>设置网关为192.168.123.5<br>重启openwrt 输入192.168.123.5 就可以登陆了<br>默认的账号root 密码password  </p>
+<h1 id="安装Home-Assistant"><a href="#安装Home-Assistant" class="headerlink" title="安装Home Assistant"></a>安装Home Assistant</h1><p>docker run -d –restart=always –name=”home-assistant” -e TZ=Asia/Shanghai -v /var/lib/docker/homeassistant:/config -p 8123:8123 -v /etc/localtime:/etc/localtime:ro –net=host homeassistant/aarch64-homeassistant:0.88.1</p>
+<p>  具体参考另一篇文章<br>  <a target="_blank" rel="noopener" href="https://163168.xyz/posts/6.html">https://163168.xyz/posts/6.html</a></p>
+<h1 id="安装宝塔搭建网站"><a href="#安装宝塔搭建网站" class="headerlink" title="安装宝塔搭建网站"></a>安装宝塔搭建网站</h1><p>安装过程直接看这里<br><a target="_blank" rel="noopener" href="https://hub.docker.com/r/startwish/n1-bt-lnmp">https://hub.docker.com/r/startwish/n1-bt-lnmp</a></p>
+<p>默认的信息<br>宝塔面板登录页面是</p>
+<p>你的IP:8888/startwish<br>账号startwish</p>
+<p>密码startwish</p>
+<p>系统root账户的密码是startwish<br>可以通过宝塔搭建自己的网站了！！！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/N1/">N1</a>
+                    
+                      <a class="hover-with-bg" href="/categories/N1/docker/">docker</a>
+                    
+                      <a class="hover-with-bg" href="/categories/N1/docker/%E5%AE%9D%E5%A1%94/">宝塔</a>
+                    
+                      <a class="hover-with-bg" href="/categories/N1/docker/%E5%AE%9D%E5%A1%94/openwrt/">openwrt</a>
+                    
+                      <a class="hover-with-bg" href="/categories/N1/docker/%E5%AE%9D%E5%A1%94/openwrt/Home-Assistant/">Home Assistant</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/N1/">N1</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%9D%E5%A1%94/">宝塔</a>
+                    
+                      <a class="hover-with-bg" href="/tags/openwrt/">openwrt</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Home-Assistant/">Home Assistant</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pages/f2a556/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">费曼学习法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/22.html">
+                        <span class="hidden-mobile">hugo搭建和使用教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

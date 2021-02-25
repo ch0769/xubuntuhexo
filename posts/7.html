@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="安装armbian测试了很多版本的Armbian+omv，OMV经常会报错，改用了XQ7的N1首个支持FullCone Nat的Armbian系统，非常好用下面是链接https://www.right.com.cn/forum/thread-788004-1-1.html">
+  
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>斐讯N1安Armbian安装OMV安装nginx+mysql安装typecho全过程 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="斐讯N1安Armbian安装OMV安装nginx+mysql安装typecho全过程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-08 18:28" pubdate>
+        2019年12月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">斐讯N1安Armbian安装OMV安装nginx+mysql安装typecho全过程</h1>
+            
+            <div class="markdown-body">
+              <h1 id="安装armbian"><a href="#安装armbian" class="headerlink" title="安装armbian"></a>安装armbian</h1><p>测试了很多版本的Armbian+omv，OMV经常会报错，改用了XQ7的N1首个支持FullCone Nat的Armbian系统，非常好用<br>下面是链接<br><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-788004-1-1.html">https://www.right.com.cn/forum/thread-788004-1-1.html</a></p>
+<span id="more"></span>
+<p>ROM下载地址：链接：<a target="_blank" rel="noopener" href="https://share.weiyun.com/5IsYMcO">https://share.weiyun.com/5IsYMcO</a> 密码：fop0i5<br>需要说明的是img制作成U盘后，不需要替换dtb，不需要更换内核，直接使用就可以，一步到位。</p>
+<p>先把镜像写入U盘，从U盘启动后，从路由器找到N1的ip地址<br>通过Xshell登陆 输入N1的ip 账号root 密码1234<br>第一次进入需要修改密码<br>再写入N1的内置存储，用下面的命令就可以了<br>/boot/create-mbr-linux.sh<br>/root/install.sh<br>写入完成后，断电，拔U盘，插电重启</p>
+<p>切换中国时间<br>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo “Asia/Shanghai” &gt; /etc/timezone</p>
+<p>运行<br>nano /etc/apt/sources.list<br>修改源为国内源<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian">http://mirrors.tuna.tsinghua.edu.cn/debian</a> stretch main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian">http://mirrors.tuna.tsinghua.edu.cn/debian</a> stretch-updates main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian-security">http://mirrors.tuna.tsinghua.edu.cn/debian-security</a> stretch/updates main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/debian">http://mirrors.tuna.tsinghua.edu.cn/debian</a> stretch-backports main</p>
+<p>或者</p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/debian">http://mirrors.ustc.edu.cn/debian</a> stretch main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/debian">http://mirrors.ustc.edu.cn/debian</a> stretch-updates main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/debian">http://mirrors.ustc.edu.cn/debian</a> stretch-backports main contrib non-free<br>deb <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/debian-security/">http://mirrors.ustc.edu.cn/debian-security/</a> stretch/updates main contrib non-free</p>
+<p>保存后，更新源<br>执行 apt-get update 命令即可更新源<br>执行 apt-get upgrade 更新软件</p>
+<h2 id="做一个补充，切换国内源后安装omv和插件有一定概率会出问题，官方的也是一样，最稳的做法是，外国ip，官方源，稳定，速度又快。"><a href="#做一个补充，切换国内源后安装omv和插件有一定概率会出问题，官方的也是一样，最稳的做法是，外国ip，官方源，稳定，速度又快。" class="headerlink" title="做一个补充，切换国内源后安装omv和插件有一定概率会出问题，官方的也是一样，最稳的做法是，外国ip，官方源，稳定，速度又快。"></a>做一个补充，切换国内源后安装omv和插件有一定概率会出问题，官方的也是一样，最稳的做法是，外国ip，官方源，稳定，速度又快。</h2><h1 id="安装omv"><a href="#安装omv" class="headerlink" title="安装omv"></a>安装omv</h1><p>armbian-config</p>
+<p>选择Software，回车确认 接着选择Softy，回车确认 最后选择OMV，空格勾选，回车确认开始安装</p>
+<p>然后，按tab键，选择OK，回车确认 最后等OMV程序自动安装完成</p>
+<p>依次选择Exit、Cancel，返回命令行<br>至此OMV安装完毕，正常的话，浏览器输入N1 ip或<a target="_blank" rel="noopener" href="http://aml/">http://aml/</a> ,会看到OpenMediaVault登陆界面</p>
+<p>此时使用默认用户名：admin 默认密码：openmediavault ，登陆即可</p>
+<p>OMV安装OMVEXTRAS<br>官方教程  <a target="_blank" rel="noopener" href="https://www.openmediavault.cn/read-omvextrasorg.html">https://www.openmediavault.cn/read-omvextrasorg.html</a><br>安装好后，按下图设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112165303.png" srcset="/img/loading.gif"></p>
+<h1 id="安装Typecho"><a href="#安装Typecho" class="headerlink" title="安装Typecho"></a>安装Typecho</h1><h2 id="在文件管理，找到自己的usb设备，我的是移动2T的移动硬盘，选择挂载。"><a href="#在文件管理，找到自己的usb设备，我的是移动2T的移动硬盘，选择挂载。" class="headerlink" title="在文件管理，找到自己的usb设备，我的是移动2T的移动硬盘，选择挂载。"></a>在文件管理，找到自己的usb设备，我的是移动2T的移动硬盘，选择挂载。</h2><p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112170829.png" srcset="/img/loading.gif"></p>
+<p>用winscp软件，到2t下面建www文件夹，在www下面建typecho文件夹，在typecho下面建public_html 文件夹  都设置777权限，如下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112170108.png" srcset="/img/loading.gif"><br><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112170222.png" srcset="/img/loading.gif"></p>
+<h2 id="安装nginx和mysql"><a href="#安装nginx和mysql" class="headerlink" title="安装nginx和mysql"></a>安装nginx和mysql</h2><p>在插件找插件，点安装就可以的，先安装nginx，再安装mysql，安装好后入下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112171153.png" srcset="/img/loading.gif"></p>
+<h3 id="设置nginx-点击pools，添加typecho"><a href="#设置nginx-点击pools，添加typecho" class="headerlink" title="设置nginx 点击pools，添加typecho"></a>设置nginx 点击pools，添加typecho</h3><p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112171656.png" srcset="/img/loading.gif"><br>点击服务器，添加后保存<br><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112171847.png" srcset="/img/loading.gif"><br>应用更改后再设置，选择typecho目录，选择公共目录，选择public_html，启用php，php-fpm-pool选择刚刚建立的typecho</p>
+<p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112172404.png" srcset="/img/loading.gif"></p>
+<p>Index下面的三个选项都打开</p>
+<p>这里先打乱一些顺序，我发现安装好typecho后，只能打开前台，文件页面和管理后台都出现404，下面就是解决方法<br>下面有个扩展选项，填入下面代码</p>
+<p>if (-f $request_filename/index.html){<br>    rewrite (.<em>) $1/index.html break;<br>}<br>if (-f $request_filename/index.php){<br>    rewrite (.</em>) $1/index.php;<br>}<br>if (!-f $request_filename){<br>    rewrite (.*) /index.php;<br>}</p>
+<p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112173220.png" srcset="/img/loading.gif"></p>
+<p>也可以直接在配置 /etc/nginx/sites-available/zzz-omv-nginx 最后面加上面的代码<br>就可以了</p>
+<p>最后在General点击启用，nginx 就配置好了<br>下面配置数据库</p>
+<h3 id="omv安装数据库"><a href="#omv安装数据库" class="headerlink" title="omv安装数据库"></a>omv安装数据库</h3><p><a target="_blank" rel="noopener" href="https://www.openmediavault.cn/read-omv-install-mysql.html">https://www.openmediavault.cn/read-omv-install-mysql.html</a></p>
+<p>打开mysql，重设密码。绑定ip改成n1的ip</p>
+<p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112174209.png" srcset="/img/loading.gif"></p>
+<p>点击show<br>用户ID：omvadmin<br>密码：刚修改过的<br>登陆后，创建数据库<br><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112174527.png" srcset="/img/loading.gif"><br>官方下载 <a target="_blank" rel="noopener" href="http://typecho.org/">http://typecho.org/</a><br>解压后，将文件上传到前面建立都public_html文件夹，就可以安装了。</p>
+<h3 id="mysql自动启动"><a href="#mysql自动启动" class="headerlink" title="mysql自动启动"></a>mysql自动启动</h3><p>安装配置完nginx和mysql后默认mysql是不能自启动的。所以还要配置数据库自启动。用winscp连接OMV系统【默认用户名root密码openmediavault】。连接后打开etc-找到rc.loal,右键点编辑，在exit 0上一行添加service mysqld start保存退出。就可以了</p>
+<h3 id="备份数据库和还原数据库"><a href="#备份数据库和还原数据库" class="headerlink" title="备份数据库和还原数据库"></a>备份数据库和还原数据库</h3><p><img src="https://cdn.jsdelivr.net/gh/waimao8/image@master/20200112182628.png" srcset="/img/loading.gif"></p>
+<h1 id="顺便推荐一个非常漂亮的主题"><a href="#顺便推荐一个非常漂亮的主题" class="headerlink" title="顺便推荐一个非常漂亮的主题"></a>顺便推荐一个非常漂亮的主题</h1><p><a target="_blank" rel="noopener" href="https://zhebk.cn/Web/Akina.html">https://zhebk.cn/Web/Akina.html</a></p>
+<h1 id="下面是相关命令和教程"><a href="#下面是相关命令和教程" class="headerlink" title="下面是相关命令和教程"></a>下面是相关命令和教程</h1><p>omv-firstaid<br>First aid 界面翻译</p>
+<p>configure network interface 配置网络界面</p>
+<p>configure web control panel 配置Web控制面板</p>
+<p>change control panel administrator password 更改控制面板管理员密码</p>
+<p>restore failed login attempt counter 恢复失败登录尝试计数器</p>
+<p>restore configuration backup 恢复配置备份</p>
+<p>check configuration status file 检查配置状态文件</p>
+<p>check RRD database 检查RRD数据库</p>
+<p>clear local upload package repository 清除本地上传包存储库</p>
+<p>clean apt 清除apt</p>
+<p>clear web control panel cache 清除Web控制面板缓存</p>
+<p>submit diagnostic report to administrator 向管理员提交诊断<br>卸载相关<br>apt-get remove 会删除软件包而保留软件的配置文件<br>apt-get purge 会同时清除软件包和软件的配置文件<br>卸载openmediavault命令<br>apt-get purge openmediavault</p>
+<p>armbian-config可视化操作里面有许多快捷的系统设置，<br>比如说基本的时间设置、网络设置，Wi-Fi设置，设置热点、安装桌面和远程、安装热门的第三方软件（诸如nginx Nextcloud、Plex、OpenMediaVault、Pi-hole、Transmission、Docker等热门软件）<br>下面收集了一些omv的相关教程，可以参考<br>omv使用</p>
+<p>OMV安装NextCloud<br><a target="_blank" rel="noopener" href="https://www.openmediavault.cn/read-omv-an-zhuang-nextcloud.html">https://www.openmediavault.cn/read-omv-an-zhuang-nextcloud.html</a></p>
+<p>phicomm N1 armbian环境下安装功能丰富的开源NAS系统 OpenMediaVault<br><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-342164-1-1.html">https://www.right.com.cn/forum/thread-342164-1-1.html</a></p>
+<p>N1 OpenMediaVault 使用DLNA+VLC多媒体应用的小白教程<br><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-342841-1-1.html">https://www.right.com.cn/forum/thread-342841-1-1.html</a></p>
+<p>OpenMediaVault(OMV)配置Docker<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5b0eacc61527">https://www.jianshu.com/p/5b0eacc61527</a></p>
+<p>OMV安装可道云(kodexplorer)<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4731a1ef01d1">https://www.jianshu.com/p/4731a1ef01d1</a></p>
+<p>OMV安装web服务器详细教程<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/0aa223757304e688cd0d6464.html">https://jingyan.baidu.com/article/0aa223757304e688cd0d6464.html</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%90%E8%AE%AFN1/">斐讯N1</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%90%E8%AE%AFN1/omv/">omv</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%90%E8%AE%AFN1/omv/typecho/">typecho</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%90%E8%AE%AFN1/omv/typecho/lnmp/">lnmp</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%90%E8%AE%AFN1/omv/typecho/lnmp/mysql/">mysql</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%90%E8%AE%AFN1/omv/typecho/lnmp/mysql/nginx/">nginx</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%90%E8%AE%AFN1/">斐讯N1</a>
+                    
+                      <a class="hover-with-bg" href="/tags/omv/">omv</a>
+                    
+                      <a class="hover-with-bg" href="/tags/lnmp/">lnmp</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typecho/">typecho</a>
+                    
+                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
+                    
+                      <a class="hover-with-bg" href="/tags/nginx/">nginx</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/8.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">N1安装omv后安装docker+transmission+lnmp搭建网站</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/6.html">
+                        <span class="hidden-mobile">斐讯N1 docker安装homeassistant  配置斐讯dc1智能插座</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
