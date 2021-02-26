@@ -68,7 +68,7 @@ in:readme &amp;lt;关键字&amp;gt; README文件带关键字查询">
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 30vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
